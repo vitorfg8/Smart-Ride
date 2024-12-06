@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SmartRide</string>
+    <string name="estimate_the_value_of_the_trip">Estimar o valor da viagem</string>
+    <string name="enter_your_id">Digite seu id</string>
+    <string name="enter_your_starting_location">Digite o local de partida</string>
+    <string name="enter_your_arrival_location">Digite o local de destino</string>
 </resources>
