@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui.presentation
+package com.vitorfg8.smartride.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
