@@ -20,7 +20,7 @@ import com.vitorfg8.smartride.R
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @Composable
-fun RequestRideScreen(modifier: Modifier = Modifier) {
+fun RideRequestScreen(modifier: Modifier = Modifier) {
     Scaffold(modifier = modifier) { padding ->
         Column(
             modifier = Modifier
@@ -61,6 +61,6 @@ fun RequestRideScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun RequestRideScreenPreview() {
     SmartRideTheme {
-        RequestRideScreen()
+        RideRequestScreen()
     }
 }
