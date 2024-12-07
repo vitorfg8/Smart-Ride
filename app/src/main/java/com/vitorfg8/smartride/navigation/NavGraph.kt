@@ -9,7 +9,7 @@ import com.vitorfg8.smartride.ui.RideRequestScreen
 @Composable
 fun NavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "ride_request") {
+    NavHost(navController = navController, startDestination = Route.RideRequest.route) {
         composable(Route.RideRequest.route) {
             RideRequestScreen()
         }
