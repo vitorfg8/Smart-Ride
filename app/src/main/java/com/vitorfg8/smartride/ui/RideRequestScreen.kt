@@ -58,7 +58,9 @@ fun RideRequestScreen(
                 })
             Button(modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp), onClick = {}) {
+                .padding(horizontal = 24.dp), onClick = {
+                onEvent(RideRequestEvent.EstimateRide)
+            }) {
                 Text(stringResource(R.string.estimate_the_value_of_the_trip))
             }
             CircularProgressIndicator(

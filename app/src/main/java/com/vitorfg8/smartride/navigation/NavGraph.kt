@@ -5,6 +5,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.vitorfg8.smartride.ui.RideOptionsScreen
 import com.vitorfg8.smartride.ui.RideRequestScreen
 import com.vitorfg8.smartride.ui.RideRequestViewModel
 import org.koin.androidx.compose.koinViewModel
@@ -22,7 +23,7 @@ fun NavGraph() {
             )
         }
         composable(Route.RideOptions.route) {
-            //TODO
+            RideOptionsScreen()
         }
         composable(Route.RideHistory.route) {
             //TODO
