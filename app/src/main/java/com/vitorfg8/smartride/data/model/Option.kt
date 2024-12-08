@@ -13,7 +13,7 @@ data class Option(
     @SerializedName("review")
     val review: Review,
     @SerializedName("value")
-    val value: Int,
+    val value: Double,
     @SerializedName("vehicle")
     val vehicle: String
 )
