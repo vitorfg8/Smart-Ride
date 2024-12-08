@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui
+package com.vitorfg8.smartride.ui.riderequest
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

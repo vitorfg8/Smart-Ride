@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui
+package com.vitorfg8.smartride.ui.rideoptions
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui
+package com.vitorfg8.smartride.ui.rideoptions
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,7 @@ import com.vitorfg8.smartride.R
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @Composable
-fun ResultItem(modifier: Modifier = Modifier) {
+fun OptionsItem(modifier: Modifier = Modifier) {
     Card(modifier = modifier.fillMaxWidth()) {
         Row(modifier = Modifier
             .fillMaxWidth()
@@ -63,8 +63,8 @@ fun ResultItem(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun ResultItemPreview() {
+private fun OptionsItemPreview() {
     SmartRideTheme {
-        ResultItem()
+        OptionsItem()
     }
 }

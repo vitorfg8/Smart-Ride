@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui
+package com.vitorfg8.smartride.ui.riderequest
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

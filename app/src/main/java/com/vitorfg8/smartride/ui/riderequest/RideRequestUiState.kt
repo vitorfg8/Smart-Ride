@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.ui
+package com.vitorfg8.smartride.ui.riderequest
 
 data class RideRequestUiState(
     val customerId: String = "",
