@@ -3,7 +3,7 @@ package com.vitorfg8.smartride.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Option(
+data class OptionResponse(
     @SerializedName("description")
     val description: String,
     @SerializedName("id")
@@ -11,7 +11,7 @@ data class Option(
     @SerializedName("name")
     val name: String,
     @SerializedName("review")
-    val review: Review,
+    val reviewResponse: ReviewResponse,
     @SerializedName("value")
     val value: Double,
     @SerializedName("vehicle")
