@@ -20,7 +20,11 @@ import com.vitorfg8.smartride.R
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @Composable
-fun RideRequestScreen(modifier: Modifier = Modifier) {
+fun RideRequestScreen(
+    uiState: RideRequestUiState,
+    onEvent: (RideRequestEvent) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Scaffold(modifier = modifier) { padding ->
         Column(
             modifier = Modifier
@@ -31,24 +35,32 @@ fun RideRequestScreen(modifier: Modifier = Modifier) {
             TextField(modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, top = 16.dp, bottom = 8.dp),
-                value = stringResource(R.string.enter_your_id),
-                onValueChange = { newValue -> /* ... */ })
+                label = { Text(stringResource(R.string.enter_your_id)) },
+                value = uiState.customerId,
+                onValueChange = { newValue ->
+                    onEvent(RideRequestEvent.UpdateCustomerId(newValue))
+                })
             TextField(modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 8.dp),
-                value = stringResource(R.string.enter_your_starting_location),
-                onValueChange = { newValue -> /* ... */ })
+                label = { Text(stringResource(R.string.enter_your_starting_location)) },
+                value = uiState.origin,
+                onValueChange = { newValue ->
+                    onEvent(RideRequestEvent.UpdateOrigin(newValue))
+                })
             TextField(modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 24.dp, end = 24.dp, top = 8.dp, bottom = 16.dp),
-                value = stringResource(R.string.enter_your_arrival_location),
-                onValueChange = { newValue -> /* ... */ })
+                label = { Text(stringResource(R.string.enter_your_arrival_location)) },
+                value = uiState.destination,
+                onValueChange = { newValue ->
+                    onEvent(RideRequestEvent.UpdateDestination(newValue))
+                })
             Button(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 24.dp), onClick = {}) {
                 Text(stringResource(R.string.estimate_the_value_of_the_trip))
             }
-
             CircularProgressIndicator(
                 modifier = Modifier.size(48.dp),
                 strokeWidth = 4.dp
@@ -61,6 +73,13 @@ fun RideRequestScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun RequestRideScreenPreview() {
     SmartRideTheme {
-        RideRequestScreen()
+        RideRequestScreen(
+            uiState = RideRequestUiState(
+                customerId = "123",
+                origin = "Rua A",
+                destination = "Rua B"
+            ),
+            onEvent = {}
+        )
     }
 }
