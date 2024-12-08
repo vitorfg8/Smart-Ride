@@ -73,5 +73,8 @@ dependencies {
     //Mockk
     testImplementation(libs.mockk)
 
+    // Google Maps
+    implementation(libs.maps.compose)
+
 
 }
