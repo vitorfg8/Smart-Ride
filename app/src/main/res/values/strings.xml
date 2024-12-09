@@ -4,4 +4,6 @@
     <string name="enter_your_id">Digite seu id</string>
     <string name="enter_your_starting_location">Digite o local de partida</string>
     <string name="enter_your_arrival_location">Digite o local de destino</string>
+    <string name="go_back">Voltar</string>
+    <string name="select">Escolher</string>
 </resources>
