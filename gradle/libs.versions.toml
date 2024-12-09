@@ -13,6 +13,7 @@ mapsCompose = "6.4.0"
 navigationCompose = "2.8.4"
 retrofit = "2.11.0"
 mockk = "1.13.11"
+secretsGradlePlugin = "2.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +39,7 @@ maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 
 
 [plugins]
