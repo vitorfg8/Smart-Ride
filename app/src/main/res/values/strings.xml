@@ -6,4 +6,7 @@
     <string name="enter_your_arrival_location">Digite o local de destino</string>
     <string name="go_back">Voltar</string>
     <string name="select">Escolher</string>
+    <string name="ride_options">Opções de viagem</string>
+    <string name="estimated_route">Rota estimada</string>
+    <string name="driver_options">Opções de motoristas</string>
 </resources>
