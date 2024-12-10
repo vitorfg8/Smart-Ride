@@ -2,6 +2,7 @@ package com.vitorfg8.smartride
 
 import android.app.Application
 import com.vitorfg8.smartride.di.apiModule
+import com.vitorfg8.smartride.di.rideOptionsModule
 import com.vitorfg8.smartride.di.rideRequestModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -14,7 +15,7 @@ class MainApplication : Application() {
             androidLogger()
             androidContext(this@MainApplication)
             modules(
-                listOf(apiModule, rideRequestModule)
+                listOf(apiModule, rideRequestModule, rideOptionsModule)
             )
         }
     }

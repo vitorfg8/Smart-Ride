@@ -1,6 +1,6 @@
 package com.vitorfg8.smartride.domain.repository
 
-import com.vitorfg8.smartride.domain.model.RideEstimate
+import com.vitorfg8.smartride.domain.model.riderequest.RideEstimate
 import kotlinx.coroutines.flow.Flow
 
 interface RideEstimateRepository {

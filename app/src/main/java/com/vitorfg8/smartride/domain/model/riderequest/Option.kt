@@ -1,5 +1,4 @@
-package com.vitorfg8.smartride.domain.model
-
+package com.vitorfg8.smartride.domain.model.riderequest
 
 data class Option(
     val description: String,

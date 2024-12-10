@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
@@ -38,10 +39,16 @@ import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RideOptionsScreen(modifier: Modifier = Modifier) {
+fun RideOptionsScreen(
+    uiState: RideOptionsUiState?,
+    onEvent: (RideOptionsEvent) -> Unit,
+    modifier: Modifier = Modifier
+) {
     Scaffold(modifier = modifier, topBar = {
         TopAppBar(title = { Text(stringResource(R.string.ride_options)) }, navigationIcon = {
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                onEvent(RideOptionsEvent.GoBack)
+            }) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = stringResource(R.string.go_back)
@@ -67,8 +74,15 @@ fun RideOptionsScreen(modifier: Modifier = Modifier) {
                     text = stringResource(R.string.driver_options)
                 )
             }
-            items(3) {
-                //OptionsItem()
+            items(uiState!!.optionUiStates) { //TODO
+                OptionsItem(
+                    driverName = it.name,
+                    value = it.value,
+                    vehicle = it.vehicle,
+                    description = it.description,
+                    rating = it.rating,
+                    onSelect = { onEvent(RideOptionsEvent.NavigateToHistory) }
+                )
             }
         }
     }
@@ -76,9 +90,10 @@ fun RideOptionsScreen(modifier: Modifier = Modifier) {
 
 @Composable
 private fun Map(modifier: Modifier = Modifier) {
+
     val cameraPosition = LatLng(-23.5215624, -46.763286699999995)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(cameraPosition, 15f)
+        position = CameraPosition.fromLatLngZoom(cameraPosition, 5f)
     }
 
     var uiSettings by remember {
@@ -117,6 +132,37 @@ private fun Map(modifier: Modifier = Modifier) {
 @Composable
 private fun RideOptionsScreenPreview() {
     SmartRideTheme {
-        RideOptionsScreen()
+        RideOptionsScreen(uiState = RideOptionsUiState(
+            destinationUiState = DestinationUiState(
+                latitude = -23.5615351, longitude = -46.6562816
+            ),
+            optionUiStates = listOf(
+                OptionUiState(
+                    description = "The truth is… I am Iron Man.",
+                    id = 1,
+                    rating = 3,
+                    value = 100.0,
+                    name = "Tony Stark",
+                    vehicle = "Audi R8 V10 coupe"
+                ), OptionUiState(
+                    description = "I was meant to rule everything.",
+                    id = 1,
+                    rating = 4,
+                    value = 60.0,
+                    name = "Wanda Maximoff",
+                    vehicle = "Buick Verano"
+                ), OptionUiState(
+                    description = "I'm not deaf, just hard of hearing.",
+                    id = 1,
+                    rating = 5,
+                    value = 70.0,
+                    name = "Clint Barton",
+                    vehicle = "Dodge Challenger 1970"
+                )
+            ),
+            originUiState = OriginUiState(
+                latitude = -23.5215624, longitude = 46.763286699999995
+            ),
+        ), onEvent = {})
     }
 }

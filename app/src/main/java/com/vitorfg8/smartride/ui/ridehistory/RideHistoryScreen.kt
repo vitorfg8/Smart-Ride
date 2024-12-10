@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.domain.model.ridehistory
+package com.vitorfg8.smartride.ui.ridehistory
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

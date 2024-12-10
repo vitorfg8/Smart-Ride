@@ -1,8 +1,8 @@
 package com.vitorfg8.smartride.ui.riderequest
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vitorfg8.smartride.domain.model.riderequest.toRideOptionsUiState
 import com.vitorfg8.smartride.domain.repository.RideEstimateRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,6 +26,7 @@ class RideRequestViewModel(
             is RideRequestEvent.EstimateRide -> {
                 estimateRide()
             }
+            else -> Unit
         }
     }
 
@@ -54,9 +55,16 @@ class RideRequestViewModel(
                 _uiState.value.origin,
                 _uiState.value.destination
             ).catch {
-                Log.e("TESTE", "estimateRide: ", it)
+                _uiState.update {
+                    it.copy(isEstimateSuccessful = false)
+                }
             }.collect { rideEstimate ->
-                Log.d("TESTE", "estimateRide: \n $rideEstimate ")
+                _uiState.update {
+                    it.copy(
+                        isEstimateSuccessful = true,
+                        rideOptions = rideEstimate.toRideOptionsUiState()
+                    )
+                }
             }
         }
     }

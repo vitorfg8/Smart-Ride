@@ -90,7 +90,7 @@ private fun OptionsItemPreview() {
         OptionsItem(
             driverName = "Tony Stark",
             value = 100.0,
-            vehicle = "Audi R8 GT",
+            vehicle = "Audi R8 V10 coupe",
             description = "The truth is… I am Iron Man.",
             rating = 5,
             onSelect = {}

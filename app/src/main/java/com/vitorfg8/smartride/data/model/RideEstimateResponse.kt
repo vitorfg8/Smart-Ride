@@ -2,11 +2,11 @@ package com.vitorfg8.smartride.data.model
 
 
 import com.google.gson.annotations.SerializedName
-import com.vitorfg8.smartride.domain.model.Destination
-import com.vitorfg8.smartride.domain.model.Option
-import com.vitorfg8.smartride.domain.model.Origin
-import com.vitorfg8.smartride.domain.model.Review
-import com.vitorfg8.smartride.domain.model.RideEstimate
+import com.vitorfg8.smartride.domain.model.riderequest.Destination
+import com.vitorfg8.smartride.domain.model.riderequest.Option
+import com.vitorfg8.smartride.domain.model.riderequest.Origin
+import com.vitorfg8.smartride.domain.model.riderequest.Review
+import com.vitorfg8.smartride.domain.model.riderequest.RideEstimate
 
 data class RideEstimateResponse(
     @SerializedName("destination")
