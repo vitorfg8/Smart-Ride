@@ -8,11 +8,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -21,11 +26,14 @@ import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @Composable
 fun RideRequestScreen(
-    uiState: RideRequestUiState,
-    onEvent: (RideRequestEvent) -> Unit,
-    modifier: Modifier = Modifier
+    uiState: RideRequestUiState, onEvent: (RideRequestEvent) -> Unit, modifier: Modifier = Modifier
 ) {
-    Scaffold(modifier = modifier) { padding ->
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(modifier = modifier, snackbarHost = {
+        SnackbarHost(hostState = snackbarHostState)
+    }) { padding ->
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -63,10 +71,28 @@ fun RideRequestScreen(
             }) {
                 Text(stringResource(R.string.estimate_the_value_of_the_trip))
             }
-            CircularProgressIndicator(
-                modifier = Modifier.size(48.dp),
-                strokeWidth = 4.dp
-            )
+
+            ShowSnackbar(uiState, onEvent, snackbarHostState)
+        }
+
+        CircularProgressIndicator(
+            modifier = Modifier.size(48.dp), strokeWidth = 4.dp
+        )
+    }
+}
+
+@Composable
+private fun ShowSnackbar(
+    uiState: RideRequestUiState,
+    onEvent: (RideRequestEvent) -> Unit,
+    snackbarHostState: SnackbarHostState
+) {
+    val context = LocalContext.current
+    LaunchedEffect(key1 = uiState.isEstimateSuccessful) {
+        if (uiState.isEstimateSuccessful == true && uiState.rideOptions != null) {
+            onEvent(RideRequestEvent.NavigateToRideOptions(uiState.rideOptions))
+        } else if (uiState.isEstimateSuccessful == false) {
+            snackbarHostState.showSnackbar(context.getString(R.string.error))
         }
     }
 }
@@ -75,13 +101,8 @@ fun RideRequestScreen(
 @Composable
 private fun RequestRideScreenPreview() {
     SmartRideTheme {
-        RideRequestScreen(
-            uiState = RideRequestUiState(
-                customerId = "123",
-                origin = "Rua A",
-                destination = "Rua B"
-            ),
-            onEvent = {}
-        )
+        RideRequestScreen(uiState = RideRequestUiState(
+            customerId = "123", origin = "Rua A", destination = "Rua B"
+        ), onEvent = {})
     }
 }
