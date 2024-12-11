@@ -1,4 +1,4 @@
-package com.vitorfg8.smartride.data.model
+package com.vitorfg8.smartride.data.model.riderequest
 
 
 import com.google.gson.annotations.SerializedName

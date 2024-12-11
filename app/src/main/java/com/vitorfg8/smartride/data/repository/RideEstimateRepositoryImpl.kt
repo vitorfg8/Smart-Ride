@@ -1,8 +1,8 @@
 package com.vitorfg8.smartride.data.repository
 
 import com.vitorfg8.smartride.data.api.RideEstimateService
-import com.vitorfg8.smartride.data.model.RideEstimateRequest
-import com.vitorfg8.smartride.data.model.toRideEstimate
+import com.vitorfg8.smartride.data.model.riderequest.RideEstimateRequest
+import com.vitorfg8.smartride.data.model.riderequest.toRideEstimate
 import com.vitorfg8.smartride.domain.repository.RideEstimateRepository
 import kotlinx.coroutines.flow.flow
 

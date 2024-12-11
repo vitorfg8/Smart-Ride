@@ -1,7 +1,7 @@
 package com.vitorfg8.smartride.data.api
 
-import com.vitorfg8.smartride.data.model.RideEstimateRequest
-import com.vitorfg8.smartride.data.model.RideEstimateResponse
+import com.vitorfg8.smartride.data.model.riderequest.RideEstimateRequest
+import com.vitorfg8.smartride.data.model.riderequest.RideEstimateResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
