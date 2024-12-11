@@ -40,7 +40,7 @@ import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RideOptionsScreen(
-    uiState: RideOptionsUiState?,
+    uiState: RideOptionsUiState,
     onEvent: (RideOptionsEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -74,7 +74,7 @@ fun RideOptionsScreen(
                     text = stringResource(R.string.driver_options)
                 )
             }
-            items(uiState!!.optionUiStates) { //TODO
+            items(uiState.optionUiStates) {
                 OptionsItem(
                     driverName = it.name,
                     value = it.value,
