@@ -1,6 +1,5 @@
 package com.vitorfg8.smartride.ui.riderequest
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vitorfg8.smartride.domain.model.riderequest.toRideOptionsUiState
@@ -35,7 +34,6 @@ class RideRequestViewModel(
         _uiState.update {
             it.copy(customerId = customerId)
         }
-        Log.d("TESTE", "updateCustomerId: ${_uiState.value.customerId}")
     }
 
     private fun updateOrigin(origin: String) {
