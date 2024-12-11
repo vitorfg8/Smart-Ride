@@ -11,6 +11,7 @@ import com.vitorfg8.smartride.ui.rideoptions.RideOptionsEvent
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsScreen
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsUiState
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsUiStateType
+import com.vitorfg8.smartride.ui.rideoptions.RideOptionsViewModel
 import com.vitorfg8.smartride.ui.riderequest.RideRequestEvent.NavigateToRideOptions
 import com.vitorfg8.smartride.ui.riderequest.RideRequestScreen
 import com.vitorfg8.smartride.ui.riderequest.RideRequestViewModel
@@ -33,11 +34,13 @@ fun NavGraph() {
                     is NavigateToRideOptions -> {
                         navController.navigate(
                             Screens.RideOptions(
-                                event.rideOptions
+                                event.rideOptions,
+                                event.customerId,
+                                event.origin,
+                                event.destination,
                             )
                         )
                     }
-
                     else -> viewModel.onEvent(event)
                 }
             })
@@ -47,7 +50,15 @@ fun NavGraph() {
             typeMap = mapOf(typeOf<RideOptionsUiState>() to RideOptionsUiStateType.rideOptionsUiStateType)
         ) {
             val args = it.toRoute<Screens.RideOptions>()
-            RideOptionsScreen(uiState = args.rideOptionsUiState, onEvent = { event ->
+            val viewModel: RideOptionsViewModel = koinViewModel<RideOptionsViewModel>()
+            viewModel.onEvent(RideOptionsEvent.UpdateState(args.rideOptionsUiState))
+            val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+            RideOptionsScreen(
+                uiState = uiState.value,
+                customerId = args.customerId,
+                origin = args.origin,
+                destination = args.destination,
+                onEvent = { event ->
                 when (event) {
                     is RideOptionsEvent.GoBack -> {
                         navController.popBackStack()
@@ -56,6 +67,7 @@ fun NavGraph() {
                     is RideOptionsEvent.NavigateToHistory -> {
                         navController.navigate(Screens.RideHistory)
                     }
+                    else -> Unit
                 }
             })
         }
@@ -73,7 +85,10 @@ object Screens {
 
     @Serializable
     data class RideOptions(
-        val rideOptionsUiState: RideOptionsUiState
+        val rideOptionsUiState: RideOptionsUiState,
+        val customerId: String,
+        val origin: String,
+        val destination: String
     )
 
     @Serializable

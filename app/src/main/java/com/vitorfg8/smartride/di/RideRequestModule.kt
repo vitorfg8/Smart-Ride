@@ -9,7 +9,7 @@ val rideRequestModule = module {
     viewModel {
         RideRequestViewModel(
             rideEstimateRepository = RideEstimateRepositoryImpl(
-                rideEstimateService = get()
+                rideService = get()
             )
         )
     }

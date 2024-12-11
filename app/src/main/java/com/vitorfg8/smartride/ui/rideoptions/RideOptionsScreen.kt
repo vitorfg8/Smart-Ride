@@ -35,12 +35,17 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.vitorfg8.smartride.R
+import com.vitorfg8.smartride.domain.model.rideconfirm.Driver
+import com.vitorfg8.smartride.domain.model.rideconfirm.RideConfirmRequest
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RideOptionsScreen(
     uiState: RideOptionsUiState,
+    customerId: String,
+    origin: String,
+    destination: String,
     onEvent: (RideOptionsEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -75,14 +80,31 @@ fun RideOptionsScreen(
                 )
             }
             items(uiState.optionUiStates) {
-                OptionsItem(
-                    driverName = it.name,
+                OptionsItem(driverName = it.name,
                     value = it.value,
                     vehicle = it.vehicle,
                     description = it.description,
                     rating = it.rating,
-                    onSelect = { onEvent(RideOptionsEvent.NavigateToHistory) }
-                )
+                    onSelect = {
+                        onEvent(
+                            RideOptionsEvent.ConfirmRide(
+                                RideConfirmRequest(
+                                    customerId = customerId,
+                                    destination = destination,
+                                    origin = origin,
+                                    distance = uiState.distance,
+                                    duration = uiState.duration,
+                                    driver = Driver(
+                                        id = it.id,
+                                        name = it.name,
+                                    ),
+                                    value = it.value,
+                                )
+                            )
+                        )
+                        onEvent(RideOptionsEvent.NavigateToHistory)
+                    })
+
             }
         }
     }
@@ -163,6 +185,6 @@ private fun RideOptionsScreenPreview() {
             originUiState = OriginUiState(
                 latitude = -23.5215624, longitude = 46.763286699999995
             ),
-        ), onEvent = {})
+        ), customerId = "123", origin = "Rua A", destination = "Rua B", onEvent = {})
     }
 }

@@ -1,6 +1,6 @@
 package com.vitorfg8.smartride.di
 
-import com.vitorfg8.smartride.data.api.RideEstimateService
+import com.vitorfg8.smartride.data.api.RideService
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -17,6 +17,6 @@ private fun provideRetrofit(): Retrofit {
         .build()
 }
 
-private fun provideRideEstimateService(retrofit: Retrofit): RideEstimateService {
-    return retrofit.create(RideEstimateService::class.java)
+private fun provideRideEstimateService(retrofit: Retrofit): RideService {
+    return retrofit.create(RideService::class.java)
 }

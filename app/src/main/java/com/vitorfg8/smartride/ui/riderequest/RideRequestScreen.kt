@@ -90,7 +90,14 @@ private fun ShowSnackbar(
     val context = LocalContext.current
     LaunchedEffect(key1 = uiState.isEstimateSuccessful) {
         if (uiState.isEstimateSuccessful == true && uiState.rideOptions != null) {
-            onEvent(RideRequestEvent.NavigateToRideOptions(uiState.rideOptions))
+            onEvent(
+                RideRequestEvent.NavigateToRideOptions(
+                    uiState.rideOptions,
+                    uiState.customerId,
+                    uiState.origin,
+                    uiState.destination
+                )
+            )
         } else if (uiState.isEstimateSuccessful == false) {
             snackbarHostState.showSnackbar(context.getString(R.string.error))
         }

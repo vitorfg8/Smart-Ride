@@ -7,5 +7,10 @@ sealed class RideRequestEvent {
     data class UpdateOrigin(val origin: String) : RideRequestEvent()
     data class UpdateDestination(val destination: String) : RideRequestEvent()
     object EstimateRide : RideRequestEvent()
-    data class NavigateToRideOptions(val rideOptions: RideOptionsUiState) : RideRequestEvent()
+    data class NavigateToRideOptions(
+        val rideOptions: RideOptionsUiState,
+        val customerId: String,
+        val origin: String,
+        val destination: String,
+    ) : RideRequestEvent()
 }

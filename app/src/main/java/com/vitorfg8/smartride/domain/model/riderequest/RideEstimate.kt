@@ -7,7 +7,7 @@ import com.vitorfg8.smartride.ui.rideoptions.RideOptionsUiState
 
 data class RideEstimate(
     val destination: Destination,
-    val distance: Int,
+    val distance: Double,
     val duration: String,
     val options: List<Option>,
     val origin: Origin,
@@ -19,7 +19,9 @@ fun RideEstimate.toRideOptionsUiState(): RideOptionsUiState {
     return RideOptionsUiState(
         destinationUiState = this.destination.toDestination(),
         optionUiStates = this.options.map { it.toOption() },
-        originUiState = this.origin.toOrigin()
+        originUiState = this.origin.toOrigin(),
+        distance = this.distance,
+        duration = this.duration
     )
 }
 

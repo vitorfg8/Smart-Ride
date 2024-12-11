@@ -8,63 +8,63 @@ import com.vitorfg8.smartride.domain.model.riderequest.Origin
 import com.vitorfg8.smartride.domain.model.riderequest.Review
 import com.vitorfg8.smartride.domain.model.riderequest.RideEstimate
 
-data class RideEstimateResponse(
+data class RideEstimateResponseDto(
     @SerializedName("destination")
-    val destinationResponse: DestinationResponse,
+    val destinationDto: DestinationDto,
     @SerializedName("distance")
-    val distance: Int,
+    val distance: Double,
     @SerializedName("duration")
     val duration: String,
     @SerializedName("options")
-    val optionResponses: List<OptionResponse>,
+    val optionRespons: List<OptionDto>,
     @SerializedName("origin")
-    val originResponse: OriginResponse,
+    val originDto: OriginDto,
     @SerializedName("routeResponse")
-    val routeResponse: RouteResponse,
+    val routeResponse: RouteDto,
     @SerializedName("error_code")
     val errorCode: String?,
     @SerializedName("error_description")
     val errorDescription: String,
 )
 
-fun RideEstimateResponse.toRideEstimate(): RideEstimate {
+fun RideEstimateResponseDto.toRideEstimate(): RideEstimate {
     return RideEstimate(
-        destination = this.destinationResponse.toDestination(),
+        destination = this.destinationDto.toDestination(),
         distance = this.distance,
         duration = this.duration,
-        options = this.optionResponses.map { it.toOption() },
-        origin = this.originResponse.toOrigin(),
+        options = this.optionRespons.map { it.toOption() },
+        origin = this.originDto.toOrigin(),
         errorCode = this.errorCode,
         errorDescription = this.errorDescription
     )
 }
 
-private fun DestinationResponse.toDestination(): Destination {
+private fun DestinationDto.toDestination(): Destination {
     return Destination(
         latitude = this.latitude,
         longitude = this.longitude
     )
 }
 
-private fun OriginResponse.toOrigin(): Origin {
+private fun OriginDto.toOrigin(): Origin {
     return Origin(
         latitude = this.latitude,
         longitude = this.longitude
     )
 }
 
-private fun OptionResponse.toOption(): Option {
+private fun OptionDto.toOption(): Option {
     return Option(
         description = this.description,
         id = this.id,
         name = this.name,
-        review = this.reviewResponse.toReview(),
+        review = this.reviewDto.toReview(),
         value = this.value,
         vehicle = this.vehicle
     )
 }
 
-private fun ReviewResponse.toReview(): Review {
+private fun ReviewDto.toReview(): Review {
     return Review(
         comment = this.comment,
         rating = this.rating

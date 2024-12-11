@@ -1,7 +1,7 @@
 package com.vitorfg8.smartride.data.api
 
-import com.vitorfg8.smartride.data.model.rideconfirm.RideConfirmRequest
-import com.vitorfg8.smartride.data.model.rideconfirm.RideConfirmResponse
+import com.vitorfg8.smartride.data.model.rideconfirm.RideConfirmRequestDto
+import com.vitorfg8.smartride.data.model.rideconfirm.RideConfirmResponseDto
 import com.vitorfg8.smartride.data.model.riderequest.RideEstimateRequestDto
 import com.vitorfg8.smartride.data.model.riderequest.RideEstimateResponseDto
 import retrofit2.http.Body
@@ -16,6 +16,6 @@ interface RideService {
 
     @PATCH("/ride/confirm")
     suspend fun confirmRide(
-        @Body request: RideConfirmRequest
-    ): RideConfirmResponse
+        @Body request: RideConfirmRequestDto
+    ): RideConfirmResponseDto
 }
