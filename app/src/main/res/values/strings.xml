@@ -10,4 +10,8 @@
     <string name="estimated_route">Rota estimada</string>
     <string name="driver_options">Opções de motoristas</string>
     <string name="error">Erro !</string>
+    <string name="last_rides">Últimas viagens</string>
+    <string name="rides_history">Histórico de viagens</string>
+    <string name="search_on_history">Pesquisar no histórico</string>
+    <string name="filter">Filtrar</string>
 </resources>

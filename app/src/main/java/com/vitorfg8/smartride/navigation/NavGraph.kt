@@ -23,7 +23,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun NavGraph() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = RideOptionsRoute) {
+    NavHost(navController = navController, startDestination = RideRequestRoute) {
         composable<RideRequestRoute> {
             val viewModel: RideRequestViewModel = koinViewModel<RideRequestViewModel>()
             val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
