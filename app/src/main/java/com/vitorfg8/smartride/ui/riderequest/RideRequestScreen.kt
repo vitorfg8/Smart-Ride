@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.vitorfg8.smartride.R
+import com.vitorfg8.smartride.ui.components.DebouncedButton
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @Composable
@@ -63,9 +63,10 @@ fun RideRequestScreen(
                 onValueChange = { newValue ->
                     onEvent(RideRequestEvent.UpdateDestination(newValue))
                 })
-            Button(modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp), onClick = {
+            DebouncedButton(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 24.dp), onClick = {
                 onEvent(RideRequestEvent.EstimateRide)
             }) {
                 Text(stringResource(R.string.estimate_the_value_of_the_trip))

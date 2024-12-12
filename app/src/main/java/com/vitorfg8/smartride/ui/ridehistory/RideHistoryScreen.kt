@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +35,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.vitorfg8.smartride.R
+import com.vitorfg8.smartride.ui.components.DebouncedButton
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -95,7 +95,8 @@ fun RideHistoryScreen(
                             }
                     )
 
-                    Button(modifier = Modifier.size(120.dp, 60.dp),
+                    DebouncedButton(
+                        modifier = Modifier.size(120.dp, 60.dp),
                         onClick = {
                             onEvent(RideHistoryEvent.FilterResults)
                         }) {
