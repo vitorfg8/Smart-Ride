@@ -72,7 +72,7 @@ fun RideOptionsScreen(
                     text = stringResource(R.string.estimated_route),
                     style = MaterialTheme.typography.titleMedium,
                 )
-                Map()
+                Map(uiState.originUiState, uiState.destinationUiState)
                 Text(
                     modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.titleMedium,
@@ -127,11 +127,15 @@ fun RideOptionsScreen(
 }
 
 @Composable
-private fun Map(modifier: Modifier = Modifier) {
+private fun Map(
+    originUiState: OriginUiState,
+    destinationUiState: DestinationUiState,
+    modifier: Modifier = Modifier
+) {
 
-    val cameraPosition = LatLng(-23.5215624, -46.763286699999995)
+    val cameraPosition = LatLng(originUiState.latitude, originUiState.longitude)
     val cameraPositionState = rememberCameraPositionState {
-        position = CameraPosition.fromLatLngZoom(cameraPosition, 5f)
+        position = CameraPosition.fromLatLngZoom(cameraPosition, 12f)
     }
 
     var uiSettings by remember {
@@ -142,8 +146,8 @@ private fun Map(modifier: Modifier = Modifier) {
     }
 
     val routeCoordinates = listOf(
-        LatLng(-23.5215624, -46.763286699999995),
-        LatLng(-23.5615351, -46.6562816),
+        LatLng(originUiState.latitude, originUiState.longitude),
+        LatLng(destinationUiState.latitude, destinationUiState.longitude),
     )
 
     Card(
