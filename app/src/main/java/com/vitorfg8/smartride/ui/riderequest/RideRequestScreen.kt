@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -23,6 +25,7 @@ import com.vitorfg8.smartride.R
 import com.vitorfg8.smartride.ui.components.DebouncedButton
 import com.vitorfg8.smartride.ui.theme.SmartRideTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RideRequestScreen(
     uiState: RideRequestUiState, onEvent: (RideRequestEvent) -> Unit, modifier: Modifier = Modifier
@@ -30,7 +33,12 @@ fun RideRequestScreen(
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    Scaffold(modifier = modifier, snackbarHost = {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(title = { Text(stringResource(R.string.app_name)) })
+        },
+        snackbarHost = {
         SnackbarHost(hostState = snackbarHostState)
     }) { padding ->
         Column(
