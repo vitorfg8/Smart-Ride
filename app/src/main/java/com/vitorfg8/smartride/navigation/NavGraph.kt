@@ -25,16 +25,16 @@ fun NavGraph() {
     val navController = rememberNavController()
 
     NavHost(
-        navController = navController, startDestination = Screens.RideHistory
+        navController = navController, startDestination = Screens.RideHistoryScreen
     ) {
-        composable<Screens.RideRequest> {
+        composable<Screens.RideRequestScreen> {
             val viewModel: RideRequestViewModel = koinViewModel<RideRequestViewModel>()
             val uiState = viewModel.uiState.collectAsStateWithLifecycle()
             RideRequestScreen(uiState = uiState.value, onEvent = { event ->
                 when (event) {
                     is NavigateToRideOptions -> {
                         navController.navigate(
-                            Screens.RideOptions(
+                            Screens.RideOptionsScreen(
                                 event.rideOptions,
                                 event.customerId,
                                 event.origin,
@@ -47,10 +47,10 @@ fun NavGraph() {
             })
         }
 
-        composable<Screens.RideOptions>(
+        composable<Screens.RideOptionsScreen>(
             typeMap = mapOf(typeOf<RideOptionsUiState>() to RideOptionsUiStateType.rideOptionsUiStateType)
         ) {
-            val args = it.toRoute<Screens.RideOptions>()
+            val args = it.toRoute<Screens.RideOptionsScreen>()
             val viewModel: RideOptionsViewModel = koinViewModel<RideOptionsViewModel>()
             viewModel.onEvent(RideOptionsEvent.UpdateState(args.rideOptionsUiState))
             val uiState = viewModel.uiState.collectAsStateWithLifecycle()
@@ -66,14 +66,14 @@ fun NavGraph() {
                     }
 
                     is RideOptionsEvent.NavigateToHistory -> {
-                        navController.navigate(Screens.RideHistory)
+                        navController.navigate(Screens.RideHistoryScreen)
                     }
                     else -> Unit
                 }
             })
         }
 
-        composable<Screens.RideHistory> {
+        composable<Screens.RideHistoryScreen> {
             val viewModel: RideHistoryViewModel = koinViewModel<RideHistoryViewModel>()
             val uiState = viewModel.uiState.collectAsStateWithLifecycle()
             RideHistoryScreen(
@@ -87,10 +87,10 @@ fun NavGraph() {
 
 object Screens {
     @Serializable
-    object RideRequest
+    object RideRequestScreen
 
     @Serializable
-    data class RideOptions(
+    data class RideOptionsScreen(
         val rideOptionsUiState: RideOptionsUiState,
         val customerId: String,
         val origin: String,
@@ -98,5 +98,5 @@ object Screens {
     )
 
     @Serializable
-    object RideHistory
+    object RideHistoryScreen
 }
