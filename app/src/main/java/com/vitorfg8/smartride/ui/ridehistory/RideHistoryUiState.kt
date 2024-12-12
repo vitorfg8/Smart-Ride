@@ -1,8 +1,6 @@
 package com.vitorfg8.smartride.ui.ridehistory
 
 
-import java.util.Date
-
 data class RideHistoryUiState(
     val customerId: String = "",
     val rides: List<Ride> = listOf(),
@@ -14,10 +12,10 @@ data class RideHistoryUiState(
 
 data class Ride(
     val id: Int,
-    val date: Date,
+    val date: String,
     val origin: String,
     val destination: String,
-    val distance: Double,
+    val distance: String,
     val duration: String,
     val driver: Driver,
     val value: Double

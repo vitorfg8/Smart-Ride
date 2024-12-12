@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -97,6 +98,10 @@ fun RideHistoryScreen(
                         style = MaterialTheme.typography.titleMedium,
                         text = stringResource(R.string.last_rides)
                     )
+
+                if (uiState.isLoading) {
+                    CircularProgressIndicator()
+                }
             }
 
             items(uiState.rides) {
@@ -183,34 +188,35 @@ private fun RideHistoryScreenPreview() {
     SmartRideTheme {
         RideHistoryScreen(
             uiState = RideHistoryUiState(
+                isLoading = true,
                 customerId = "123",
                 rides = listOf(
                     Ride(
                         id = 1,
-                        date = java.util.Date(),
+                        date = "01/12/2024",
                         origin = "São Paulo",
                         destination = "Rio de Janeiro",
-                        distance = 100.0,
+                        distance = "100.0 Km",
                         duration = "1h",
                         driver = Driver(1, "Homer Simpson"),
                         value = 10.0
                     ),
                     Ride(
                         id = 1,
-                        date = java.util.Date(),
+                        date = "01/12/2024",
                         origin = "São Paulo",
                         destination = "Rio de Janeiro",
-                        distance = 100.0,
+                        distance = "100.0 Km",
                         duration = "1h",
                         driver = Driver(1, "Homer Simpson"),
                         value = 10.0
                     ),
                     Ride(
                         id = 1,
-                        date = java.util.Date(),
+                        date = "01/12/2024",
                         origin = "São Paulo",
                         destination = "Rio de Janeiro",
-                        distance = 100.0,
+                        distance = "100.0 Km",
                         duration = "1h",
                         driver = Driver(1, "Homer Simpson"),
                         value = 10.0

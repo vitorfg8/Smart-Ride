@@ -26,7 +26,7 @@ fun HistoryItem(
     origin: String,
     destination: String,
     value: Double,
-    distance: Double,
+    distance: String,
     duration: String,
     modifier: Modifier = Modifier
 ) {
@@ -96,7 +96,7 @@ private fun OptionsItemPreview() {
             origin = "São Paulo",
             destination = "Rio de Janeiro",
             value = 100.0,
-            distance = 10.0,
+            distance = "10.0 Km",
             duration = "10 min"
         )
     }
