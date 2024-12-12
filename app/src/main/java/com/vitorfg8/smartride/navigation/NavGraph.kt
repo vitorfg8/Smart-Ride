@@ -25,7 +25,7 @@ fun NavGraph() {
     val navController = rememberNavController()
 
     NavHost(
-        navController = navController, startDestination = Screens.RideRequestScreen
+        navController = navController, startDestination = Screens.RideHistoryScreen
     ) {
         composable<Screens.RideRequestScreen> {
             val viewModel: RideRequestViewModel = koinViewModel<RideRequestViewModel>()
