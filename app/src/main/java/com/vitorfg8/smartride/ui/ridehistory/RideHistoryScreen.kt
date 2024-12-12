@@ -101,7 +101,9 @@ fun RideHistoryScreen(
                 }
 
                 LaunchedEffect(key1 = uiState.showError) {
-                    snackbarHostState.showSnackbar(uiState.errorMessage)
+                    if (uiState.showError) {
+                        snackbarHostState.showSnackbar(uiState.errorMessage)
+                    }
                 }
 
             }

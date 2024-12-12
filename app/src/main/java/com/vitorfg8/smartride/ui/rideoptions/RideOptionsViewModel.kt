@@ -59,10 +59,8 @@ class RideOptionsViewModel(private val rideConfirmRepository: RideConfirmReposit
                     when (error.code()) {
                         400 -> message =
                             "Os dados fornecidos no corpoda requisição são inválidos. Tente novamente"
-
                         404 -> message = "Motorista não encontrado. Tente novamente"
                         406 -> message = "Quilometragem inválida para o motorista. Tente novamente"
-
                         else -> message = "Erro desconhecido. Tente novamente"
                     }
                 }

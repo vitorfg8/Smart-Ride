@@ -84,11 +84,15 @@ fun RideOptionsScreen(
                     )
                 }
                 LaunchedEffect(key1 = uiState.showError) {
-                    snackbarHostState.showSnackbar(uiState.errorMessage)
+                    if (uiState.showError) {
+                        snackbarHostState.showSnackbar(uiState.errorMessage)
+                    }
                 }
 
-                if (uiState.isConfirmed) {
-                    onEvent(RideOptionsEvent.NavigateToHistory)
+                LaunchedEffect(key1 = uiState.isConfirmed) {
+                    if (uiState.isConfirmed) {
+                        onEvent(RideOptionsEvent.NavigateToHistory)
+                    }
                 }
 
             }
