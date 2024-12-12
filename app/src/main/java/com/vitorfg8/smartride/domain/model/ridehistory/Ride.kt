@@ -40,12 +40,3 @@ private fun String.toFormattedDateTime(): String {
         ""
     }
 }
-
-private fun Double.formatDecimalPlaces(decimalPlaces: Int, useGrouping: Boolean = false): String {
-    val formatter = if (useGrouping) {
-        "%,.${decimalPlaces}f"
-    } else {
-        "%.${decimalPlaces}f"
-    }
-    return String.format(formatter, this)
-}
