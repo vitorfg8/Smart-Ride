@@ -1,6 +1,5 @@
 package com.vitorfg8.smartride.ui.ridehistory
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vitorfg8.smartride.domain.model.ridehistory.toUiState
@@ -12,6 +11,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class RideHistoryViewModel(
     private val rideHistoryRepository: RideHistoryRepository
@@ -44,22 +44,33 @@ class RideHistoryViewModel(
             ).onStart {
                 _uiState.update {
                     it.copy(
-                        isLoading = true
+                        isLoading = true,
+                        showError = false,
+                        rides = listOf()
                     )
                 }
             }.catch { error ->
+                var message = ""
+                if (error is HttpException) {
+                    when (error.code()) {
+                        400 -> message = "Motorista invalido. Tente novamente"
+                        404 -> message = "Nenhum registro encontrado. Tente novamente"
+                        else -> message = "Erro desconhecido. Tente novamente"
+                    }
+                }
                 _uiState.update {
                     it.copy(
-                        isLoading = false
+                        isLoading = false,
+                        showError = true,
+                        errorDescription = message,
+                        rides = listOf()
                     )
                 }
-                Log.e("TESTE", "filterResults: ${error.message}", error)
             }.collect { result ->
-                Log.d("TESTE", "filterResults: $result")
-
                 _uiState.update {
                     it.copy(
                         rides = result.rides.map { it.toUiState() },
+                        showError = false,
                         isLoading = false
                     )
                 }

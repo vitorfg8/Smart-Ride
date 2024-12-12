@@ -19,10 +19,13 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -42,8 +45,14 @@ fun RideHistoryScreen(
     onEvent: (RideHistoryEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
 
-    Scaffold(modifier = modifier, topBar = {
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
+        topBar = {
         TopAppBar(title = { Text(stringResource(R.string.rides_history)) }, navigationIcon = {
             IconButton(onClick = {
 
@@ -102,6 +111,11 @@ fun RideHistoryScreen(
                 if (uiState.isLoading) {
                     CircularProgressIndicator()
                 }
+
+                LaunchedEffect(key1 = uiState.showError) {
+                    snackbarHostState.showSnackbar(uiState.errorDescription)
+                }
+
             }
 
             items(uiState.rides) {
@@ -129,7 +143,7 @@ fun DriverSelector(
 ) {
 
     val driverOptions = listOf(
-        Driver(0, "Todos"),
+        Driver(null, "Todos"),
         Driver(1, "Homer Simpson"),
         Driver(2, "Dominic Toretto"),
         Driver(3, "James Bond")

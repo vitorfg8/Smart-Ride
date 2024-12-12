@@ -4,9 +4,9 @@ package com.vitorfg8.smartride.ui.ridehistory
 data class RideHistoryUiState(
     val customerId: String = "",
     val rides: List<Ride> = listOf(),
-    val errorCode: String = "",
     val errorDescription: String = "",
     val isLoading: Boolean = false,
+    val showError: Boolean = false,
     val currentDriverSelected: Driver = Driver(0, "Todos")
 )
 
@@ -22,6 +22,6 @@ data class Ride(
 )
 
 data class Driver(
-    val id: Int,
+    val id: Int?,
     val name: String
 )
