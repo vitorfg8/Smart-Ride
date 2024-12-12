@@ -1,6 +1,8 @@
 package com.vitorfg8.smartride.ui.components
 
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +18,7 @@ fun DebouncedButton(
     onClick: () -> Unit,
     debounceTime: Long = 300L,
     modifier: Modifier = Modifier,
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
     content: @Composable () -> Unit
 ) {
     var isClickable by remember { mutableStateOf(true) }
@@ -33,6 +36,7 @@ fun DebouncedButton(
                 }
             }
         },
+        colors = colors,
         modifier = modifier,
         enabled = isClickable
     ) {
