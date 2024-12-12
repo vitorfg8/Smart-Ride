@@ -9,5 +9,7 @@ data class RideRequestUiState(
     val distance: Double = 0.0,
     val duration: String = "",
     val isEstimateSuccessful: Boolean? = null,
+    val isLoading: Boolean = false,
+    val errorMessage: String = "",
     val rideOptions: RideOptionsUiState? = null
 )

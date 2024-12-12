@@ -17,7 +17,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -73,11 +72,11 @@ fun RideRequestScreen(
             }
 
             ShowSnackbar(uiState, onEvent, snackbarHostState)
+            if (uiState.isLoading)
+                CircularProgressIndicator(
+                    modifier = Modifier.size(48.dp), strokeWidth = 4.dp
+                )
         }
-
-        CircularProgressIndicator(
-            modifier = Modifier.size(48.dp), strokeWidth = 4.dp
-        )
     }
 }
 
@@ -87,19 +86,19 @@ private fun ShowSnackbar(
     onEvent: (RideRequestEvent) -> Unit,
     snackbarHostState: SnackbarHostState
 ) {
-    val context = LocalContext.current
+
     LaunchedEffect(key1 = uiState.isEstimateSuccessful) {
         if (uiState.isEstimateSuccessful == true && uiState.rideOptions != null) {
             onEvent(
                 RideRequestEvent.NavigateToRideOptions(
                     uiState.rideOptions,
-                    uiState.customerId,
-                    uiState.origin,
-                    uiState.destination
+                    uiState.customerId.orEmpty(),
+                    uiState.origin.orEmpty(),
+                    uiState.destination.orEmpty()
                 )
             )
         } else if (uiState.isEstimateSuccessful == false) {
-            snackbarHostState.showSnackbar(context.getString(R.string.error))
+            snackbarHostState.showSnackbar(uiState.errorMessage)
         }
     }
 }

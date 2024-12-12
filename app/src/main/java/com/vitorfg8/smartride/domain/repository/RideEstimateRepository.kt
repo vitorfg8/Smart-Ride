@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 interface RideEstimateRepository {
 
     suspend fun estimateRide(
-        customerId: String,
-        origin: String,
-        destination: String
+        customerId: String?,
+        origin: String?,
+        destination: String?
     ): Flow<RideEstimate>
 
 }

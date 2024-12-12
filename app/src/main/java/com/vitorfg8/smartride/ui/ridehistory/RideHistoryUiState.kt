@@ -4,7 +4,7 @@ package com.vitorfg8.smartride.ui.ridehistory
 data class RideHistoryUiState(
     val customerId: String = "",
     val rides: List<Ride> = listOf(),
-    val errorDescription: String = "",
+    val errorMessage: String = "",
     val isLoading: Boolean = false,
     val showError: Boolean = false,
     val currentDriverSelected: Driver = Driver(0, "Todos")

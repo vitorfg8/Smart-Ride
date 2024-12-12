@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.flow
 class RideEstimateRepositoryImpl(val rideService: RideService) :
     RideEstimateRepository {
     override suspend fun estimateRide(
-        customerId: String, origin: String, destination: String
+        customerId: String?, origin: String?, destination: String?
     ) = flow {
         emit(
             rideService.estimateRide(RideEstimateRequestDto(customerId, origin, destination))

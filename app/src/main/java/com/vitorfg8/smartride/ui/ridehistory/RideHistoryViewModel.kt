@@ -62,7 +62,7 @@ class RideHistoryViewModel(
                     it.copy(
                         isLoading = false,
                         showError = true,
-                        errorDescription = message,
+                        errorMessage = message,
                         rides = listOf()
                     )
                 }
