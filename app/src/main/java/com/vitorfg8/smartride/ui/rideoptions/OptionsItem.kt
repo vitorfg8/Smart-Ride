@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,22 +56,28 @@ fun OptionsItem(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        driverName,
+                        modifier = Modifier,
+                        text = driverName,
                         style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp)
                     )
-                    Text(
-                        "R$ $value",
-                        style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                    )
-                }
-                Row(modifier = Modifier.fillMaxWidth()) {
-                    Text(vehicle, maxLines = 1)
                     Text(" • $rating ")
                     Image(
                         modifier = Modifier.size(20.dp),
                         painter = painterResource(R.drawable.star_heroicons),
                         contentDescription = null
                     )
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = "R$ $value",
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.End
+                        )
+                    )
+                }
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    Text(vehicle, maxLines = 1)
                 }
                 Text(text = description, style = MaterialTheme.typography.labelSmall)
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
