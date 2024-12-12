@@ -92,9 +92,9 @@ private fun ShowSnackbar(
             onEvent(
                 RideRequestEvent.NavigateToRideOptions(
                     uiState.rideOptions,
-                    uiState.customerId.orEmpty(),
-                    uiState.origin.orEmpty(),
-                    uiState.destination.orEmpty()
+                    uiState.customerId,
+                    uiState.origin,
+                    uiState.destination
                 )
             )
         } else if (uiState.isEstimateSuccessful == false) {
