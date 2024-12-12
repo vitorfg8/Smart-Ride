@@ -74,7 +74,7 @@ fun RideHistoryScreen(
                     label = { Text(stringResource(R.string.enter_your_id)) },
                     value = uiState.customerId,
                         onValueChange = {
-
+                            onEvent(RideHistoryEvent.UpdateCustomerId(it))
                         })
 
                 Row(modifier = Modifier.padding(horizontal = 16.dp)) {

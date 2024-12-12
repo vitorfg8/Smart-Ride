@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.vitorfg8.smartride.ui.ridehistory.RideHistoryScreen
-import com.vitorfg8.smartride.ui.ridehistory.RideHistoryUiState
+import com.vitorfg8.smartride.ui.ridehistory.RideHistoryViewModel
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsEvent
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsScreen
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsUiState
@@ -25,7 +25,7 @@ fun NavGraph() {
     val navController = rememberNavController()
 
     NavHost(
-        navController = navController, startDestination = Screens.RideRequest
+        navController = navController, startDestination = Screens.RideHistory
     ) {
         composable<Screens.RideRequest> {
             val viewModel: RideRequestViewModel = koinViewModel<RideRequestViewModel>()
@@ -74,7 +74,12 @@ fun NavGraph() {
         }
 
         composable<Screens.RideHistory> {
-            RideHistoryScreen(uiState = RideHistoryUiState(), onEvent = {})
+            val viewModel: RideHistoryViewModel = koinViewModel<RideHistoryViewModel>()
+            val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+            RideHistoryScreen(
+                uiState = uiState.value,
+                onEvent = viewModel::onEvent
+            )
         }
     }
 }
