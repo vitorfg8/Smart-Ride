@@ -24,7 +24,7 @@ fun HistoryItem(
     driverName: String,
     date: String,
     origin: String,
-    destiny: String,
+    destination: String,
     value: Double,
     distance: Double,
     duration: String,
@@ -78,7 +78,7 @@ fun HistoryItem(
                             contentDescription = null,
                             tint = Color(0xFFFF5349)
                         )
-                        Text(text = destiny)
+                        Text(text = destination)
                     }
                 }
             }
@@ -94,7 +94,7 @@ private fun OptionsItemPreview() {
             driverName = "Tony Stark",
             date = "01/12/2024 às 20:20",
             origin = "São Paulo",
-            destiny = "Rio de Janeiro",
+            destination = "Rio de Janeiro",
             value = 100.0,
             distance = 10.0,
             duration = "10 min"

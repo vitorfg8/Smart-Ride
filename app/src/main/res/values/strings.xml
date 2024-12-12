@@ -14,4 +14,5 @@
     <string name="rides_history">Histórico de viagens</string>
     <string name="search_on_history">Pesquisar no histórico</string>
     <string name="filter">Filtrar</string>
+    <string name="driver">Motorista</string>
 </resources>

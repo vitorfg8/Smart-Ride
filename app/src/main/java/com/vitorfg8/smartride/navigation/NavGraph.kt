@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.vitorfg8.smartride.ui.ridehistory.RideHistoryScreen
+import com.vitorfg8.smartride.ui.ridehistory.RideHistoryUiState
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsEvent
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsScreen
 import com.vitorfg8.smartride.ui.rideoptions.RideOptionsUiState
@@ -73,7 +74,7 @@ fun NavGraph() {
         }
 
         composable<Screens.RideHistory> {
-            RideHistoryScreen()
+            RideHistoryScreen(uiState = RideHistoryUiState(), onEvent = {})
         }
     }
 }
