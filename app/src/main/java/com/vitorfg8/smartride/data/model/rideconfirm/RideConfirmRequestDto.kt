@@ -9,6 +9,6 @@ data class RideConfirmRequestDto(
     val destination: String,
     val distance: Double,
     val duration: String,
-    val driverDto: DriverDto,
+    val driver: DriverDto,
     val value: Double
 )

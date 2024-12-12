@@ -21,7 +21,7 @@ fun RideConfirmRequest.toRideConfirmDto(): RideConfirmRequestDto {
         destination = this.destination,
         distance = this.distance,
         duration = this.duration,
-        driverDto = this.driver.toDriverDto(),
+        driver = this.driver.toDriverDto(),
         value = this.value
     )
 }

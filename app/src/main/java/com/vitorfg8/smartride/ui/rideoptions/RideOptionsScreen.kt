@@ -4,19 +4,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +54,15 @@ fun RideOptionsScreen(
     onEvent: (RideOptionsEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Scaffold(modifier = modifier, topBar = {
+
+    val snackbarHostState = remember { SnackbarHostState() }
+
+    Scaffold(
+        modifier = modifier,
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
+        topBar = {
         TopAppBar(title = { Text(stringResource(R.string.ride_options)) }, navigationIcon = {
             IconButton(onClick = {
                 onEvent(RideOptionsEvent.GoBack)
@@ -78,6 +91,19 @@ fun RideOptionsScreen(
                     style = MaterialTheme.typography.titleMedium,
                     text = stringResource(R.string.driver_options)
                 )
+                if (uiState.isLoading) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(48.dp), strokeWidth = 4.dp
+                    )
+                }
+                LaunchedEffect(key1 = uiState.showError) {
+                    snackbarHostState.showSnackbar(uiState.errorMessage)
+                }
+
+                if (uiState.isConfirmed) {
+                    onEvent(RideOptionsEvent.NavigateToHistory)
+                }
+
             }
             items(uiState.optionUiStates) {
                 OptionsItem(driverName = it.name,
@@ -102,7 +128,6 @@ fun RideOptionsScreen(
                                 )
                             )
                         )
-                        onEvent(RideOptionsEvent.NavigateToHistory)
                     })
 
             }
@@ -158,6 +183,7 @@ private fun RideOptionsScreenPreview() {
             destinationUiState = DestinationUiState(
                 latitude = -23.5615351, longitude = -46.6562816
             ),
+            isLoading = false,
             optionUiStates = listOf(
                 OptionUiState(
                     description = "The truth is… I am Iron Man.",

@@ -64,11 +64,10 @@ fun NavGraph() {
                     is RideOptionsEvent.GoBack -> {
                         navController.popBackStack()
                     }
-
                     is RideOptionsEvent.NavigateToHistory -> {
                         navController.navigate(Screens.RideHistoryScreen)
                     }
-                    else -> Unit
+                    else -> viewModel.onEvent(event)
                 }
             })
         }

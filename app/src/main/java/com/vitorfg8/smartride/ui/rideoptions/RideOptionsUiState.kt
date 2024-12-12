@@ -11,5 +11,7 @@ data class RideOptionsUiState(
     val distance: Double = 0.0,
     val duration: String = "",
     val showError: Boolean = false,
+    val isLoading: Boolean = false,
+    val isConfirmed: Boolean = false,
     val errorMessage: String = ""
 )
