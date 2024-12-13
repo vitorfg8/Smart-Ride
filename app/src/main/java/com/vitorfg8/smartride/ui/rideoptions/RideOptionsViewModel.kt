@@ -1,6 +1,5 @@
 package com.vitorfg8.smartride.ui.rideoptions
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vitorfg8.smartride.domain.model.rideconfirm.RideConfirmRequest
@@ -42,9 +41,7 @@ class RideOptionsViewModel(private val rideConfirmRepository: RideConfirmReposit
     }
 
     private fun confirmRide(rideConfirmRequest: RideConfirmRequest) {
-        Log.d("TESTE", "rideConfirmRequest: $rideConfirmRequest")
         viewModelScope.launch {
-
             rideConfirmRepository.confirmRide(
                 rideConfirmRequest
             ).onStart {
@@ -73,16 +70,16 @@ class RideOptionsViewModel(private val rideConfirmRepository: RideConfirmReposit
                     )
                 }
             }.collect {
-                /*if (rideConfirmRequest.driver.id == 1 && rideConfirmRequest.distance.toKm() >= 1 ||
+                if (rideConfirmRequest.driver.id == 1 && rideConfirmRequest.distance.toKm() >= 1 ||
                     rideConfirmRequest.driver.id == 2 && rideConfirmRequest.distance.toKm() >= 5 ||
-                    rideConfirmRequest.driver.id == 3 && rideConfirmRequest.distance.toKm() >= 10) {*/
-
+                    rideConfirmRequest.driver.id == 3 && rideConfirmRequest.distance.toKm() >= 10
+                ) {
                 _uiState.update {
                     it.copy(
                         isLoading = false, showError = false, isConfirmed = true
                     )
                 }
-                /*} else {
+                } else {
                     _uiState.update {
                         it.copy(
                             showError = true,
@@ -91,9 +88,8 @@ class RideOptionsViewModel(private val rideConfirmRepository: RideConfirmReposit
                             errorMessage = "Quilometragem inválida para o motorista"
                         )
                     }
-                }*/
+                }
             }
-
         }
     }
 
